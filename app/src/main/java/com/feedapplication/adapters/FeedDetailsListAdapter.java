@@ -76,12 +76,8 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
 
         void setFeedDetails(FeedDetails feedDetails, final int position) {
             binding.setFeedDetails(feedDetails);
-            binding.rootView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mIFeedDetailsListAdapterCallBack.onFeedDetailsClick(position);
-                }
-            });
+            binding.setCallback(mIFeedDetailsListAdapterCallBack);
+            binding.setPosition(position);
         }
     }
 

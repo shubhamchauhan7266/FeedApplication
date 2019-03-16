@@ -37,6 +37,9 @@ public class FeedDetails {
     @Expose
     public String description;
 
+    @Expose
+    public boolean isLiked;
+
     @Ignore
     public boolean isTextOnly() {
         if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {

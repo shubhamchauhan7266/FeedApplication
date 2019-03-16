@@ -3,24 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="feedDetails"
             type="com.feedapplication.database.entity.FeedDetails" />
+
+        <variable
+            name="callback"
+            type="com.feedapplication.adapters.FeedDetailsListAdapter.IFeedDetailsListAdapterCallBack" />
+
+        <variable
+            name="position"
+            type="Integer"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/root_view"
-        android:layout_height="@dimen/_500sdp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{()-> callback.onFeedDetailsClick(position)}"
+        android:layout_marginTop="@dimen/_10sdp">
 
         <TextView
             android:id="@+id/tv_time_stamp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{feedDetails.time}"
-            android:padding="@dimen/_10sdp"
             android:background="@color/light_grey"
+            android:padding="@dimen/_10sdp"
+            android:text="@{feedDetails.time}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,22 +53,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_70sdp"
             android:text="@{feedDetails.text}"
             android:visibility="@{feedDetails.textOnly?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/iv_post"
             android:layout_width="0dp"
             android:layout_height="@dimen/_150sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_70sdp"
             android:scaleType="centerCrop"
             android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_title"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/placeholder" />
 
         <ImageView
@@ -66,16 +82,19 @@
             android:layout_width="@dimen/_150sdp"
             android:layout_height="@dimen/_150sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_70sdp"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/placeholder" />
 
         <TextView
             android:id="@+id/tv_text_half"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:text="@{feedDetails.text}"
@@ -84,12 +103,43 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <android.support.constraint.Group
-            android:id="@+id/group"
+            android:id="@+id/group_half"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
             app:constraint_referenced_ids="tv_text_half,iv_post_half" />
 
+        <android.support.constraint.Group
+            android:id="@+id/group_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
+            app:constraint_referenced_ids="tv_text_half,iv_post_half,iv_post,tv_text" />
+
+        <Button
+            android:id="@+id/bt_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_25sdp"
+            android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
+            android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
+            android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:text="Narendre Modi"
+            app:layout_constraintBottom_toBottomOf="@+id/bt_like"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/bt_like"
+            app:layout_constraintTop_toTopOf="@+id/bt_like" />
 
     </android.support.constraint.ConstraintLayout>
 
