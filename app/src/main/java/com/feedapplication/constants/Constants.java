@@ -9,4 +9,5 @@ public interface Constants {
 
     int NETWORK_TIMEOUT = 60;
 
+    String FEED_DETAILS_KEY = "feedDetails";
 }

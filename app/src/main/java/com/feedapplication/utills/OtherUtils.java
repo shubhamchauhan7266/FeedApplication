@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.text.Html;
 import android.util.Log;
 
-import com.weatherforecastapplication.R;
+import com.feedapplication.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,5 +62,15 @@ public class OtherUtils {
         if (!((Activity) context).isDestroyed() && !((Activity) context).isFinishing()) {
             builder.show();
         }
+    }
+
+    /**
+     * Method is used to check the given string is null or empty.
+     *
+     * @param pStr pStr
+     * @return true if string is null/empty otherwise false.
+     */
+    public static boolean isNullOrEmpty(String pStr) {
+        return pStr == null || pStr.trim().length() == 0 || pStr.trim().equalsIgnoreCase("null");
     }
 }

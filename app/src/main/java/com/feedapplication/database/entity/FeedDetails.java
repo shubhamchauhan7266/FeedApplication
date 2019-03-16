@@ -1,8 +1,10 @@
 package com.feedapplication.database.entity;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.feedapplication.utills.OtherUtils;
 import com.google.gson.annotations.Expose;
 
 /**
@@ -34,4 +36,35 @@ public class FeedDetails {
 
     @Expose
     public String description;
+
+    @Ignore
+    public boolean isTextOnly() {
+        if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {
+            return false;
+        } else if (OtherUtils.isNullOrEmpty(text)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Ignore
+    public boolean isPostOnly() {
+        if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {
+            return false;
+        } else if (OtherUtils.isNullOrEmpty(imageUrl)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Ignore
+    public boolean isPostAndTextAvailable() {
+        if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.feedapplication.ui;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -12,12 +13,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.feedapplication.BaseActivity;
 import com.feedapplication.R;
 import com.feedapplication.adapters.FeedDetailsListAdapter;
+import com.feedapplication.constants.Constants;
 import com.feedapplication.database.entity.FeedDetails;
 import com.feedapplication.databinding.ActivityHomeBinding;
 import com.feedapplication.viewmodel.FeedDetailsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter.IFeedDetailsListAdapterCallBack, Observer<List<FeedDetails>> {
 
@@ -40,6 +43,9 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
     @Override
     public void onFeedDetailsClick(int position) {
 
+        Intent intent = new Intent(this, FeedDetailsActivity.class);
+        intent.putExtra(Constants.FEED_DETAILS_KEY, ((FeedDetailsListAdapter) Objects.requireNonNull(mBinding.rvFeedList.getAdapter())).getFeedDetailsList());
+        startActivity(intent);
     }
 
     @Override
@@ -51,14 +57,14 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
             mViewModel.mIsItemAvailable.setValue(true);
             FeedDetailsListAdapter feedDetailsListAdapter = (FeedDetailsListAdapter) mBinding.rvFeedList.getAdapter();
 
-            if(feedDetailsListAdapter!=null){
+            if (feedDetailsListAdapter != null) {
                 feedDetailsListAdapter.setFeedDetailsList((ArrayList<FeedDetails>) feedDetailsList);
                 feedDetailsListAdapter.notifyDataSetChanged();
-            }else {
+            } else {
                 mBinding.rvFeedList.setLayoutManager(new LinearLayoutManager(this));
-                mBinding.rvFeedList.setAdapter(new FeedDetailsListAdapter(this,new ArrayList<FeedDetails>()));
+                mBinding.rvFeedList.setAdapter(new FeedDetailsListAdapter(this, new ArrayList<FeedDetails>()));
             }
-        }else {
+        } else {
             mViewModel.mIsItemAvailable.setValue(false);
         }
     }

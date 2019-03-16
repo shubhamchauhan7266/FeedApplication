@@ -39,6 +39,15 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
         mFeedDetailsList = feedDetailsList;
     }
 
+    /**
+     * Method is used to get feed details list.
+     *
+     * @return a list of feed
+     */
+    public ArrayList<FeedDetails> getFeedDetailsList() {
+        return mFeedDetailsList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -48,7 +57,7 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-        viewHolder.setFeedDetails(mFeedDetailsList.get(position));
+        viewHolder.setFeedDetails(mFeedDetailsList.get(position), position);
     }
 
     @Override
@@ -59,17 +68,24 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         final FeedDetailsItemBinding binding;
+
         public ViewHolder(@NonNull FeedDetailsItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        void setFeedDetails(FeedDetails feedDetails){
+        void setFeedDetails(FeedDetails feedDetails, final int position) {
             binding.setFeedDetails(feedDetails);
+            binding.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mIFeedDetailsListAdapterCallBack.onFeedDetailsClick(position);
+                }
+            });
         }
     }
 
-    public interface IFeedDetailsListAdapterCallBack{
+    public interface IFeedDetailsListAdapterCallBack {
         void onFeedDetailsClick(int position);
     }
 }
