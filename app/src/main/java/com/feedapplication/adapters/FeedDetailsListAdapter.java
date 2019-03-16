@@ -1,6 +1,7 @@
 package com.feedapplication.adapters;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.feedapplication.R;
 import com.feedapplication.database.entity.FeedDetails;
+import com.feedapplication.databinding.FeedDetailsItemBinding;
 
 import java.util.ArrayList;
 
@@ -40,22 +42,13 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_details_item, parent, false);
-
-        return new ViewHolder(itemLayoutView);
+        FeedDetailsItemBinding feedDetailsItemBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.feed_details_item, parent, false);
+        return new ViewHolder(feedDetailsItemBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
-
-//        viewHolder.tvCityName.setText(mCityList.get(position).name);
-//
-//        viewHolder.tvCityName.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mICitySearchListCallBack.onCityClick(position);
-//            }
-//        });
+        viewHolder.setFeedDetails(mFeedDetailsList.get(position));
     }
 
     @Override
@@ -65,10 +58,14 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        final FeedDetailsItemBinding binding;
+        public ViewHolder(@NonNull FeedDetailsItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
 
-//            tvCityName = itemView.findViewById(R.id.tv_city_name);
+        void setFeedDetails(FeedDetails feedDetails){
+            binding.setFeedDetails(feedDetails);
         }
     }
 
