@@ -113,7 +113,6 @@
             android:id="@+id/group_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
             app:constraint_referenced_ids="tv_text_half,iv_post_half,iv_post,tv_text" />
 
         <Button
