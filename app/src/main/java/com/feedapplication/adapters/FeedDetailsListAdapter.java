@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 
 /**
- * This adapter class is used for City list which come when we search list.
+ * This adapter class is used for showing feed details list.
  *
  * @author Shubham Chauhan
  */
