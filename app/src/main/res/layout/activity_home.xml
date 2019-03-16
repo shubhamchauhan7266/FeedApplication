@@ -4,15 +4,30 @@
     tools:context=".ui.HomeActivity">
 
     <data>
+
         <variable
             name="feedDetailsViewModel"
             type="com.feedapplication.viewmodel.FeedDetailsViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_feed_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.VISIBLE:View.GONE}" />
+
+        <TextView
+            android:id="@+id/tv_no_data_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_data_available"
+            android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.GONE:View.VISIBLE}"/>
+
+    </FrameLayout>
 
 </layout>

@@ -3,9 +3,11 @@ package com.feedapplication.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.feedapplication.BaseActivity;
 import com.feedapplication.R;
@@ -14,23 +16,25 @@ import com.feedapplication.database.entity.FeedDetails;
 import com.feedapplication.databinding.ActivityHomeBinding;
 import com.feedapplication.viewmodel.FeedDetailsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter.IFeedDetailsListAdapterCallBack, Observer<List<FeedDetails>> {
 
     private FeedDetailsViewModel mViewModel;
+    private ActivityHomeBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ActivityHomeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
 
         showProgressDialog();
         mViewModel = ViewModelProviders.of(this).get(FeedDetailsViewModel.class);
         mViewModel.getFeedDetailsList(this).observe(this, this);
-        binding.setFeedDetailsViewModel(mViewModel);
+        mBinding.setFeedDetailsViewModel(mViewModel);
     }
 
     @Override
@@ -39,13 +43,23 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
     }
 
     @Override
-    public void onChanged(@Nullable List<FeedDetails> feedDetails) {
+    public void onChanged(@Nullable List<FeedDetails> feedDetailsList) {
 
         removeProgressDialog();
 
-        if (feedDetails != null && feedDetails.size() > 0) {
-//            mDailyWeatherDetailAdapter.setWeatherList(dailyWeatherForecast.list);
-//            mDailyWeatherDetailAdapter.notifyDataSetChanged();
+        if (feedDetailsList != null && feedDetailsList.size() > 0) {
+            mViewModel.mIsItemAvailable.setValue(true);
+            FeedDetailsListAdapter feedDetailsListAdapter = (FeedDetailsListAdapter) mBinding.rvFeedList.getAdapter();
+
+            if(feedDetailsListAdapter!=null){
+                feedDetailsListAdapter.setFeedDetailsList((ArrayList<FeedDetails>) feedDetailsList);
+                feedDetailsListAdapter.notifyDataSetChanged();
+            }else {
+                mBinding.rvFeedList.setLayoutManager(new LinearLayoutManager(this));
+                mBinding.rvFeedList.setAdapter(new FeedDetailsListAdapter(this,new ArrayList<FeedDetails>()));
+            }
+        }else {
+            mViewModel.mIsItemAvailable.setValue(false);
         }
     }
 }
