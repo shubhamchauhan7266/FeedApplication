@@ -14,132 +14,138 @@
             type="com.feedapplication.database.entity.FeedDetails" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Feed"
-            app:titleTextColor="@color/white" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_10sdp"
-            android:text="@{feedDetails.title}"
-            android:textColor="@color/fontPrimary50"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-        <RelativeLayout
-            android:id="@+id/rl_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title">
-
-            <ImageView
-                android:id="@+id/iv_post_half"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:scaleType="centerCrop"
-                android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
-                app:srcCompat="@drawable/placeholder"
-                bind:imageUrl="@{feedDetails.imageUrl}" />
-
-            <ImageView
-                android:id="@+id/iv_post"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
-                android:scaleType="centerCrop"
-                android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
-                app:srcCompat="@drawable/placeholder"
-                bind:imageUrl="@{feedDetails.imageUrl}" />
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="Feed"
+                app:titleTextColor="@color/white" />
 
             <TextView
-                android:id="@+id/tv_text"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/iv_post_half"
-                android:text="@{feedDetails.text}"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@{feedDetails.title}"
+                android:textColor="@color/fontPrimary50"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <RelativeLayout
+                android:id="@+id/rl_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                <ImageView
+                    android:id="@+id/iv_post_half"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:scaleType="centerCrop"
+                    android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
+                    app:srcCompat="@drawable/placeholder"
+                    bind:imageUrl="@{feedDetails.imageUrl}" />
+
+                <ImageView
+                    android:id="@+id/iv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:scaleType="centerCrop"
+                    android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
+                    app:srcCompat="@drawable/placeholder"
+                    bind:imageUrl="@{feedDetails.imageUrl}" />
+
+                <TextView
+                    android:id="@+id/tv_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/iv_post_half"
+                    android:text="@{feedDetails.text}"
+                    android:textColor="@color/fontPrimary70"
+                    android:textSize="@{feedDetails.postAndTextAvailable ? @dimen/_11sdp : @dimen/_17sdp}"
+                    android:visibility="@{feedDetails.postOnly?View.GONE:View.VISIBLE}" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_like"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
+                android:onClick="onLikeDislikeClick"
+                android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
+                android:textColor="@{feedDetails.isLiked ? @color/white : @color/colorPrimary}"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rl_view" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:text="@{feedDetails.name}"
+                android:textColor="@color/fontPrimary50"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_like"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bt_like"
+                app:layout_constraintTop_toTopOf="@+id/bt_like" />
+
+            <TextView
+                android:id="@+id/tv_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/description"
                 android:textColor="@color/fontPrimary70"
-                android:textSize="@{feedDetails.postAndTextAvailable ? @dimen/_11sdp : @dimen/_17sdp}"
-                android:visibility="@{feedDetails.postOnly?View.GONE:View.VISIBLE}" />
+                android:textSize="@dimen/_13sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/bt_like"
+                app:layout_constraintTop_toBottomOf="@+id/bt_like" />
 
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/bt_like"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
-            android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
-            android:textColor="@{feedDetails.isLiked ? @color/white : @color/colorPrimary}"
-            android:textSize="@dimen/_11sdp"
-            android:textStyle="bold"
-            android:onClick="onLikeDislikeClick"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rl_view" />
-
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:text="@{feedDetails.name}"
-            android:textColor="@color/fontPrimary50"
-            android:textSize="@dimen/_11sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_like"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/bt_like"
-            app:layout_constraintTop_toTopOf="@+id/bt_like" />
-
-        <TextView
-            android:id="@+id/tv_description_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/description"
-            android:textColor="@color/fontPrimary70"
-            android:textSize="@dimen/_13sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/bt_like"
-            app:layout_constraintTop_toBottomOf="@+id/bt_like" />
-
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:maxLines="10"
-            android:text="@{feedDetails.description}"
-            android:textColor="@color/fontPrimary50"
-            android:textSize="@dimen/_11sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_description_text"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description_text" />
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:maxLines="10"
+                android:text="@{feedDetails.description}"
+                android:textColor="@color/fontPrimary50"
+                android:textSize="@dimen/_11sdp"
+                android:layout_marginBottom="@dimen/_25sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_description_text"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_text" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

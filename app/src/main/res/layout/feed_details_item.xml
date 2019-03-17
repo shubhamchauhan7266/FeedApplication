@@ -113,7 +113,7 @@
             <Button
                 android:id="@+id/bt_like"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
                 android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
