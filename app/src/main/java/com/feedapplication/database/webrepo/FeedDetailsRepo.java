@@ -31,6 +31,10 @@ public class FeedDetailsRepo {
         insertFeedDetailsTask(feedDetailsList);
     }
 
+    public void deleteAllRecords(){
+        deleteAllRecordsTask();
+    }
+
     public ArrayList<FeedDetails> getFeedDetailsList() {
         return (ArrayList<FeedDetails>) mFeedDetailsDao.getFeedDetailsList();
     }
@@ -45,6 +49,17 @@ public class FeedDetailsRepo {
             @Override
             protected Void doInBackground(Void... voids) {
                 mFeedDetailsDao.insert(feedDetailsList);
+                return null;
+            }
+        }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void deleteAllRecordsTask() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mFeedDetailsDao.deleteAll();
                 return null;
             }
         }.execute();

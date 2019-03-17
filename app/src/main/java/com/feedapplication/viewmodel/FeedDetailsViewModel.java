@@ -68,6 +68,8 @@ public class FeedDetailsViewModel extends ViewModel {
 
                 //finally we are setting the list to our MutableLiveData and DB
                 FeedDetailsRepo repo = new FeedDetailsRepo(context, ((BaseActivity) context).getApplication());
+
+                repo.deleteAllRecords();
                 repo.insertFeedDetailsList((ArrayList<FeedDetails>) response.body());
                 mFeedDetailsList.setValue(response.body());
             }

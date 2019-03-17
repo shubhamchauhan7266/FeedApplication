@@ -27,6 +27,6 @@ public interface FeedDetailsDao {
     @Query("SELECT id, title, name, description, imageUrl, text, time, isLiked FROM feed_details WHERE id = :id")
     FeedDetails getFeedDetails(int id);
 
-//    @Delete
-//    long deleteAllFeedDetails();
+    @Query("DELETE FROM feed_details")
+    void deleteAll();
 }
