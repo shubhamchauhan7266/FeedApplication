@@ -89,14 +89,15 @@
         <Button
             android:id="@+id/bt_like"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
             android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
-            android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
+            android:textColor="@{feedDetails.isLiked ? @color/white : @color/colorPrimary}"
             android:textSize="@dimen/_11sdp"
             android:textStyle="bold"
+            android:onClick="onLikeDislikeClick"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 

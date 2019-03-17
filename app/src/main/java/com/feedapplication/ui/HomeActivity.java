@@ -24,6 +24,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
 
     private FeedDetailsViewModel mViewModel;
     private ActivityHomeBinding mBinding;
+    private boolean mIsRefreshRequired;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
     public void onLikeDislikeClick(int position) {
         FeedDetails feedDetails = ((FeedDetailsListAdapter) Objects.requireNonNull(mBinding.rvFeedList.getAdapter())).getFeedDetailsList().get(position);
         feedDetails.isLiked = !feedDetails.isLiked;
-        mViewModel.setLikedDisLiked(this,feedDetails.id,feedDetails.isLiked);
+        mViewModel.setLikedDisLiked(this, feedDetails.id, feedDetails.isLiked);
         Objects.requireNonNull(mBinding.rvFeedList.getAdapter()).notifyItemChanged(position);
     }
 
@@ -72,5 +73,22 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
         } else {
             mViewModel.mIsItemAvailable.set(false);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(mIsRefreshRequired){
+            mIsRefreshRequired = false;
+            mViewModel.getFeedDetailsListFromDB(this);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mIsRefreshRequired = true;
     }
 }

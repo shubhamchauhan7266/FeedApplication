@@ -34,7 +34,6 @@ public class FeedDetailsViewModel extends ViewModel {
     private MutableLiveData<List<FeedDetails>> mFeedDetailsList;
 
     public ObservableBoolean mIsItemAvailable = new ObservableBoolean(false);
-    public ObservableBoolean mIsLiked = new ObservableBoolean(false);
 
     //we will call this method to get the data
     public LiveData<List<FeedDetails>> getFeedDetailsList(BaseActivity context) {
@@ -50,6 +49,20 @@ public class FeedDetailsViewModel extends ViewModel {
             ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
             mFeedDetailsList.setValue(feedDetails);
         }
+
+        //finally we will return the list
+        return mFeedDetailsList;
+    }
+
+    public LiveData<List<FeedDetails>> getFeedDetailsListFromDB(BaseActivity context) {
+        //if the list is null
+        if (mFeedDetailsList == null) {
+            mFeedDetailsList = new MutableLiveData<>();
+            //we will load it asynchronously from server in this method
+        }
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication());
+        ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
+        mFeedDetailsList.setValue(feedDetails);
 
         //finally we will return the list
         return mFeedDetailsList;
