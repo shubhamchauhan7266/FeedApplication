@@ -4,7 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
-import android.databinding.Bindable;
+import android.databinding.ObservableBoolean;
+import android.databinding.PropertyChangeRegistry;
 import android.util.Log;
 
 import com.feedapplication.BaseActivity;
@@ -28,11 +29,11 @@ import retrofit2.Response;
 public class FeedDetailsViewModel extends ViewModel {
 
     private String TAG = FeedDetailsViewModel.class.getSimpleName();
-
+    private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
     //this is the data that we will fetch asynchronously
     private MutableLiveData<List<FeedDetails>> mFeedDetailsList;
 
-    public MutableLiveData<Boolean> mIsItemAvailable;
+    public ObservableBoolean mIsItemAvailable = new ObservableBoolean(false);
 
     //we will call this method to get the data
     public LiveData<List<FeedDetails>> getFeedDetailsList(BaseActivity context) {

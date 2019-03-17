@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
         removeProgressDialog();
 
         if (feedDetailsList != null && feedDetailsList.size() > 0) {
-            mViewModel.mIsItemAvailable.setValue(true);
+            mViewModel.mIsItemAvailable.set(true);
             FeedDetailsListAdapter feedDetailsListAdapter = (FeedDetailsListAdapter) mBinding.rvFeedList.getAdapter();
 
             if (feedDetailsListAdapter != null) {
@@ -62,7 +62,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
                 mBinding.rvFeedList.setAdapter(new FeedDetailsListAdapter(this, new ArrayList<FeedDetails>()));
             }
         } else {
-            mViewModel.mIsItemAvailable.setValue(false);
+            mViewModel.mIsItemAvailable.set(false);
         }
     }
 }
