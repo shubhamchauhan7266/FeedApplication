@@ -49,7 +49,7 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
         } else {
             FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
             ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
-            mFeedDetailsList.setValue(feedDetails);
+            mFeedDetailsList.setValue(getFilteredList(feedDetails));
         }
 
         //finally we will return the list
@@ -64,7 +64,7 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
         }
         FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
         ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
-        mFeedDetailsList.setValue(feedDetails);
+        mFeedDetailsList.setValue(getFilteredList(feedDetails));
 
         //finally we will return the list
         return mFeedDetailsList;
@@ -104,6 +104,17 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
         FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
         ArrayList<FeedDetails> feedDetailsList = repo.getFeedDetailsList();
 
+        mFeedDetailsList.setValue(getFilteredList(feedDetailsList));
+    }
+
+    /**
+     * Method is used to group data according to date.
+     *
+     * @param feedDetailsList feedDetailsList
+     * @return a list of feed details
+     */
+    private ArrayList<FeedDetails> getFilteredList(ArrayList<FeedDetails> feedDetailsList) {
+
         //prepare data for grouping
         if (feedDetailsList != null && feedDetailsList.size() > 0) {
 
@@ -115,7 +126,6 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
                 timeStamp = feedDetails.time;
             }
         }
-
-        mFeedDetailsList.setValue(feedDetailsList);
+        return feedDetailsList;
     }
 }
