@@ -10,6 +10,7 @@ import com.feedapplication.R;
 import com.feedapplication.constants.Constants;
 import com.feedapplication.database.entity.FeedDetails;
 import com.feedapplication.databinding.ActivityFeedDetailsBinding;
+import com.feedapplication.utills.ConnectivityUtils;
 import com.feedapplication.viewmodel.FeedDetailsViewModel;
 
 public class FeedDetailsActivity extends BaseActivity {
@@ -29,6 +30,13 @@ public class FeedDetailsActivity extends BaseActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_feed_details);
         setSupportActionBar(mBinding.toolbar);
         mViewModel = ViewModelProviders.of(this).get(FeedDetailsViewModel.class);
+
+        if (ConnectivityUtils.isNetworkEnabled(this)) {
+            mViewModel.mIsOfflineMode.set(true);
+        }else {
+            mViewModel.mIsOfflineMode.set(false);
+        }
+        mBinding.setFeedDetailsViewModel(mViewModel);
         mBinding.setFeedDetails(mFeedDetails);
     }
 

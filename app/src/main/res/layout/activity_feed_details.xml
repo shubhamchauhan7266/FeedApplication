@@ -12,6 +12,10 @@
         <variable
             name="feedDetails"
             type="com.feedapplication.database.entity.FeedDetails" />
+
+        <variable
+            name="feedDetailsViewModel"
+            type="com.feedapplication.viewmodel.FeedDetailsViewModel" />
     </data>
 
     <android.support.v4.widget.NestedScrollView
@@ -20,7 +24,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/_25sdp">
 
             <android.support.v7.widget.Toolbar
@@ -41,9 +45,9 @@
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/light_grey"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
-                android:background="@color/light_grey"
                 android:text="@{feedDetails.title}"
                 android:textColor="@color/fontPrimary50"
                 android:textSize="@dimen/_12sdp"
@@ -56,8 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title">
@@ -148,6 +152,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_description_text"
                 app:layout_constraintTop_toBottomOf="@+id/tv_description_text" />
+
+            <TextView
+                android:id="@+id/tv_offline_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/light_grey"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/you_are_in_offline_mode"
+                android:textColor="@color/red"
+                android:visibility="@{feedDetailsViewModel.mIsOfflineMode?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description" />
         </android.support.constraint.ConstraintLayout>
+
     </android.support.v4.widget.NestedScrollView>
 </layout>

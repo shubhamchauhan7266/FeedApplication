@@ -32,6 +32,7 @@
             android:id="@+id/rv_feed_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/tv_offline_mode"
             android:layout_below="@id/toolbar"
             android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.VISIBLE:View.GONE}" />
 
@@ -42,6 +43,18 @@
             android:layout_centerInParent="true"
             android:text="@string/no_data_available"
             android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.GONE:View.VISIBLE}" />
+
+        <TextView
+            android:id="@+id/tv_offline_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_grey"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/you_are_in_offline_mode"
+            android:textColor="@color/red"
+            android:visibility="@{feedDetailsViewModel.mIsOfflineMode?View.GONE:View.VISIBLE}" />
 
     </RelativeLayout>
 

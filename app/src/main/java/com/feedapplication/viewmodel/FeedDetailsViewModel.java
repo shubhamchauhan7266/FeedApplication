@@ -34,6 +34,7 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
     private MutableLiveData<List<FeedDetails>> mFeedDetailsList;
 
     public ObservableBoolean mIsItemAvailable = new ObservableBoolean(false);
+    public ObservableBoolean mIsOfflineMode = new ObservableBoolean(false);
 
     //we will call this method to get the data
     public LiveData<List<FeedDetails>> getFeedDetailsList(BaseActivity context) {
@@ -43,10 +44,12 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
             //we will load it asynchronously from server in this method
         }
         if (ConnectivityUtils.isNetworkEnabled(context)) {
+            mIsOfflineMode.set(true);
             FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
             repo.deleteAllRecords();
             loadFeedDetailsListData(context);
         } else {
+            mIsOfflineMode.set(false);
             FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
             ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
             mFeedDetailsList.setValue(getFilteredList(feedDetails));

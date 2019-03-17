@@ -4,4 +4,5 @@
     <string name="like">Like</string>
     <string name="unlike">UnLike</string>
     <string name="description">Description</string>
+    <string name="you_are_in_offline_mode">You are in Offline mode.</string>
 </resources>

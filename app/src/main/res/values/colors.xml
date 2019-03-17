@@ -22,4 +22,5 @@
     <color name="light_grey">#60dadada</color>
     <color name="background_grey">#60EEEEEE</color>
     <color name="transparent">#00000000</color>
+    <color name="red">#FF0000</color>
 </resources>
