@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.FeedDetailsActivity">
 
     <data>
@@ -18,6 +18,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="Feed"
+            app:titleTextColor="@color/white" />
+
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="0dp"
@@ -29,7 +43,7 @@
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <RelativeLayout
             android:id="@+id/rl_view"
@@ -47,18 +61,18 @@
                 android:layout_height="@dimen/_150sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:scaleType="centerCrop"
-                bind:imageUrl="@{feedDetails.imageUrl}"
                 android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
-                app:srcCompat="@drawable/placeholder" />
+                app:srcCompat="@drawable/placeholder"
+                bind:imageUrl="@{feedDetails.imageUrl}" />
 
             <ImageView
                 android:id="@+id/iv_post"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
                 android:scaleType="centerCrop"
-                bind:imageUrl="@{feedDetails.imageUrl}"
                 android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
-                app:srcCompat="@drawable/placeholder" />
+                app:srcCompat="@drawable/placeholder"
+                bind:imageUrl="@{feedDetails.imageUrl}" />
 
             <TextView
                 android:id="@+id/tv_text"
@@ -81,8 +95,8 @@
             android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
             android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
             android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
-            android:textStyle="bold"
             android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 
@@ -120,9 +134,9 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:maxLines="10"
+            android:text="@{feedDetails.description}"
             android:textColor="@color/fontPrimary50"
             android:textSize="@dimen/_11sdp"
-            android:text="@{feedDetails.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_description_text"
             app:layout_constraintTop_toBottomOf="@+id/tv_description_text" />

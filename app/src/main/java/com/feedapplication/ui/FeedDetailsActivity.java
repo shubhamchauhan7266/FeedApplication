@@ -23,6 +23,7 @@ public class FeedDetailsActivity extends BaseActivity {
         }
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_feed_details);
+        setSupportActionBar(mBinding.toolbar);
         mBinding.setFeedDetails(mFeedDetails);
     }
 }

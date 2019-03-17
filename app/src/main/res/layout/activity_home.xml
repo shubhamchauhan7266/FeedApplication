@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.HomeActivity">
 
@@ -12,24 +13,36 @@
             type="com.feedapplication.viewmodel.FeedDetailsViewModel" />
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="Feed"
+            app:titleTextColor="@color/white" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_feed_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
             android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.VISIBLE:View.GONE}" />
 
         <TextView
             android:id="@+id/tv_no_data_available"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerInParent="true"
             android:text="@string/no_data_available"
-            android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.GONE:View.VISIBLE}"/>
+            android:visibility="@{feedDetailsViewModel.mIsItemAvailable?View.GONE:View.VISIBLE}" />
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </layout>

@@ -30,7 +30,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
         super.onCreate(savedInstanceState);
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-
+        setSupportActionBar(mBinding.toolbar);
         showProgressDialog();
         mViewModel = ViewModelProviders.of(this).get(FeedDetailsViewModel.class);
         mViewModel.getFeedDetailsList(this).observe(this, this);
