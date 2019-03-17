@@ -34,6 +34,7 @@ public class FeedDetailsViewModel extends ViewModel {
     private MutableLiveData<List<FeedDetails>> mFeedDetailsList;
 
     public ObservableBoolean mIsItemAvailable = new ObservableBoolean(false);
+    public ObservableBoolean mIsLiked = new ObservableBoolean(false);
 
     //we will call this method to get the data
     public LiveData<List<FeedDetails>> getFeedDetailsList(BaseActivity context) {
@@ -54,6 +55,10 @@ public class FeedDetailsViewModel extends ViewModel {
         return mFeedDetailsList;
     }
 
+    public void setLikedDisLiked(BaseActivity context, int id, boolean isLiked) {
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication());
+        repo.setLikedDisliked(id, isLiked);
+    }
 
     //This method is using Retrofit to get the JSON data from URL
     private void loadFeedDetailsListData(final Context context) {
@@ -71,7 +76,7 @@ public class FeedDetailsViewModel extends ViewModel {
 
                 repo.deleteAllRecords();
                 repo.insertFeedDetailsList((ArrayList<FeedDetails>) response.body());
-                mFeedDetailsList.setValue(response.body());
+                mFeedDetailsList.setValue(repo.getFeedDetailsList());
             }
 
             @Override

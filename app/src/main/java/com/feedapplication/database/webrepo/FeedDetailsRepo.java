@@ -27,11 +27,15 @@ public class FeedDetailsRepo {
         mFeedDetailsDao = database.getFeedDetailsDao();
     }
 
+    public void setLikedDisliked(int id, boolean isLiked) {
+        updateLikedOrDisliked(id, isLiked);
+    }
+
     public void insertFeedDetailsList(ArrayList<FeedDetails> feedDetailsList) {
         insertFeedDetailsTask(feedDetailsList);
     }
 
-    public void deleteAllRecords(){
+    public void deleteAllRecords() {
         deleteAllRecordsTask();
     }
 
@@ -60,6 +64,17 @@ public class FeedDetailsRepo {
             @Override
             protected Void doInBackground(Void... voids) {
                 mFeedDetailsDao.deleteAll();
+                return null;
+            }
+        }.execute();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void updateLikedOrDisliked(final int id, final boolean isLiked) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                mFeedDetailsDao.setLikeDislike(id, isLiked);
                 return null;
             }
         }.execute();

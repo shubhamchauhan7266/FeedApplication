@@ -46,6 +46,14 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
     }
 
     @Override
+    public void onLikeDislikeClick(int position) {
+        FeedDetails feedDetails = ((FeedDetailsListAdapter) Objects.requireNonNull(mBinding.rvFeedList.getAdapter())).getFeedDetailsList().get(position);
+        feedDetails.isLiked = !feedDetails.isLiked;
+        mViewModel.setLikedDisLiked(this,feedDetails.id,feedDetails.isLiked);
+        Objects.requireNonNull(mBinding.rvFeedList.getAdapter()).notifyItemChanged(position);
+    }
+
+    @Override
     public void onChanged(@Nullable List<FeedDetails> feedDetailsList) {
 
         removeProgressDialog();

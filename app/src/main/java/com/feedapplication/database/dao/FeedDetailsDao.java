@@ -29,4 +29,7 @@ public interface FeedDetailsDao {
 
     @Query("DELETE FROM feed_details")
     void deleteAll();
+
+    @Query("UPDATE feed_details SET isLiked = :isLiked WHERE id = :id")
+    void setLikeDislike(int id, boolean isLiked);
 }

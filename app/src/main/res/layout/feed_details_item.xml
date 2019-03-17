@@ -120,6 +120,7 @@
                 android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
                 android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
+                android:onClick="@{()-> callback.onLikeDislikeClick(position)}"
                 app:layout_constraintStart_toStartOf="@+id/tv_title"
                 app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 

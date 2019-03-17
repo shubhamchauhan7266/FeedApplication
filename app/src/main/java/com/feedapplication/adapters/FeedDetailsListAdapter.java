@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.feedapplication.R;
@@ -83,5 +82,6 @@ public class FeedDetailsListAdapter extends RecyclerView.Adapter<FeedDetailsList
 
     public interface IFeedDetailsListAdapterCallBack {
         void onFeedDetailsClick(int position);
+        void onLikeDislikeClick(int position);
     }
 }
