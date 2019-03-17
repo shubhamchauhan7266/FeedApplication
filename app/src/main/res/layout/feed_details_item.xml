@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="feedDetails"
             type="com.feedapplication.database.entity.FeedDetails" />
@@ -30,7 +32,7 @@
             android:layout_height="wrap_content"
             android:background="@color/light_grey"
             android:padding="@dimen/_10sdp"
-            android:text="@{feedDetails.time}"
+            android:text="@{String.valueOf(feedDetails.time)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -133,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:text="Narendre Modi"
+            android:text="@{feedDetails.name}"
             app:layout_constraintBottom_toBottomOf="@+id/bt_like"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
