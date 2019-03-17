@@ -41,7 +41,6 @@
                 android:id="@+id/iv_post_half"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:scaleType="centerCrop"
                 android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
@@ -51,7 +50,6 @@
                 android:id="@+id/iv_post"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:scaleType="centerCrop"
                 android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
                 app:srcCompat="@drawable/placeholder" />
@@ -60,7 +58,6 @@
                 android:id="@+id/tv_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_toEndOf="@+id/iv_post_half"
                 android:text="@{feedDetails.text}" />
 
