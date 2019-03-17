@@ -41,7 +41,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
     public void onFeedDetailsClick(int position) {
 
         Intent intent = new Intent(this, FeedDetailsActivity.class);
-        intent.putExtra(Constants.FEED_DETAILS_KEY, ((FeedDetailsListAdapter) Objects.requireNonNull(mBinding.rvFeedList.getAdapter())).getFeedDetailsList());
+        intent.putExtra(Constants.FEED_DETAILS_KEY, ((FeedDetailsListAdapter) Objects.requireNonNull(mBinding.rvFeedList.getAdapter())).getFeedDetailsList().get(position));
         startActivity(intent);
     }
 
@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter
                 feedDetailsListAdapter.notifyDataSetChanged();
             } else {
                 mBinding.rvFeedList.setLayoutManager(new LinearLayoutManager(this));
-                mBinding.rvFeedList.setAdapter(new FeedDetailsListAdapter(this, new ArrayList<FeedDetails>()));
+                mBinding.rvFeedList.setAdapter(new FeedDetailsListAdapter(this, (ArrayList<FeedDetails>) feedDetailsList));
             }
         } else {
             mViewModel.mIsItemAvailable.set(false);

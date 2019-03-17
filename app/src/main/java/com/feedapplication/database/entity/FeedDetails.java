@@ -7,13 +7,15 @@ import android.arch.persistence.room.PrimaryKey;
 import com.feedapplication.utills.OtherUtils;
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * This Entity class is used to create a table for feed Details.
  *
  * @author Shubham Chauhan
  */
 @Entity(tableName = "feed_details")
-public class FeedDetails {
+public class FeedDetails implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @Expose
