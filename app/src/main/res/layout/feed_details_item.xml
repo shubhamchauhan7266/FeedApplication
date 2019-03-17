@@ -28,7 +28,6 @@
         android:background="@color/white"
         app:cardCornerRadius="@dimen/_5sdp">
 
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/root_view"
             android:layout_width="match_parent"
@@ -44,6 +43,9 @@
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
                 android:text="@{String.valueOf(feedDetails.time)}"
+                android:textColor="@color/fontPrimary80"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +58,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:text="@{feedDetails.title}"
+                android:textColor="@color/fontPrimary50"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +100,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_toEndOf="@+id/iv_post_half"
-                    android:text="@{feedDetails.text}" />
+                    android:text="@{feedDetails.text}"
+                    android:textColor="@color/fontPrimary70"
+                    android:textSize="@{feedDetails.postAndTextAvailable ? @dimen/_11sdp : @dimen/_17sdp}"
+                    android:visibility="@{feedDetails.postOnly?View.GONE:View.VISIBLE}" />
 
             </RelativeLayout>
 
@@ -109,6 +116,7 @@
                 android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
                 android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
                 android:textStyle="bold"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toStartOf="@+id/tv_title"
                 app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 
@@ -119,6 +127,8 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:text="@{feedDetails.name}"
+                android:textColor="@color/fontPrimary50"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/bt_like"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

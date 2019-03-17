@@ -7,6 +7,7 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="feedDetails"
             type="com.feedapplication.database.entity.FeedDetails" />
@@ -20,9 +21,11 @@
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{feedDetails.title}"
-            android:padding="@dimen/_10sdp"
             android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="@{feedDetails.title}"
+            android:textColor="@color/fontPrimary50"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +62,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/iv_post_half"
-                android:text="@{feedDetails.text}" />
+                android:text="@{feedDetails.text}"
+                android:textColor="@color/fontPrimary70"
+                android:textSize="@{feedDetails.postAndTextAvailable ? @dimen/_11sdp : @dimen/_17sdp}"
+                android:visibility="@{feedDetails.postOnly?View.GONE:View.VISIBLE}" />
 
         </RelativeLayout>
 
@@ -73,6 +79,7 @@
             android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
             android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
             android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 
@@ -83,6 +90,8 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:text="@{feedDetails.name}"
+            android:textColor="@color/fontPrimary50"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="@+id/bt_like"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/bt_like"
@@ -94,6 +103,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/description"
+            android:textColor="@color/fontPrimary70"
+            android:textSize="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/bt_like"
@@ -106,6 +117,8 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:maxLines="10"
+            android:textColor="@color/fontPrimary50"
+            android:textSize="@dimen/_11sdp"
             android:text="@{feedDetails.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_description_text"
