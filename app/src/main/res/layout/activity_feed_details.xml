@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="@dimen/_10sdp"
+                android:background="@color/light_grey"
                 android:text="@{feedDetails.title}"
                 android:textColor="@color/fontPrimary50"
                 android:textSize="@dimen/_12sdp"
