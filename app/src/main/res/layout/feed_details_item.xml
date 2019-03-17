@@ -41,12 +41,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/light_grey"
-                android:gravity="center"
                 android:padding="@dimen/_10sdp"
                 android:text="@{String.valueOf(feedDetails.time)}"
                 android:textColor="@color/fontPrimary80"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
+                android:visibility="@{feedDetails.isShowDate ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -116,11 +116,11 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
+                android:onClick="@{()-> callback.onLikeDislikeClick(position)}"
                 android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
                 android:textColor="@{feedDetails.isLiked ? @color/white : @color/colorPrimary}"
                 android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
-                android:onClick="@{()-> callback.onLikeDislikeClick(position)}"
                 app:layout_constraintStart_toStartOf="@+id/tv_title"
                 app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 

@@ -43,11 +43,11 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
             //we will load it asynchronously from server in this method
         }
         if (ConnectivityUtils.isNetworkEnabled(context)) {
-            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
+            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
             repo.deleteAllRecords();
             loadFeedDetailsListData(context);
         } else {
-            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
+            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
             ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
             mFeedDetailsList.setValue(feedDetails);
         }
@@ -62,7 +62,7 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
             mFeedDetailsList = new MutableLiveData<>();
             //we will load it asynchronously from server in this method
         }
-        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
         ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
         mFeedDetailsList.setValue(feedDetails);
 
@@ -71,7 +71,7 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
     }
 
     public void setLikedDisLiked(BaseActivity context, int id, boolean isLiked) {
-        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
         repo.setLikedDisliked(id, isLiked);
     }
 
@@ -87,7 +87,7 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
                 assert response.body() != null;
 
                 //finally we are setting the list to our MutableLiveData and DB
-                FeedDetailsRepo repo = new FeedDetailsRepo(context, ((BaseActivity) context).getApplication(),FeedDetailsViewModel.this);
+                FeedDetailsRepo repo = new FeedDetailsRepo(context, ((BaseActivity) context).getApplication(), FeedDetailsViewModel.this);
                 repo.insertFeedDetailsList((ArrayList<FeedDetails>) response.body());
             }
 
@@ -101,8 +101,21 @@ public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.I
 
     @Override
     public void onDbOperationSuccess(BaseActivity context) {
-        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
-        ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
-        mFeedDetailsList.setValue(feedDetails);
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(), this);
+        ArrayList<FeedDetails> feedDetailsList = repo.getFeedDetailsList();
+
+        //prepare data for grouping
+        if (feedDetailsList != null && feedDetailsList.size() > 0) {
+
+            long timeStamp = feedDetailsList.get(0).time;
+            int id = feedDetailsList.get(0).id;
+            for (FeedDetails feedDetails : feedDetailsList) {
+
+                feedDetails.isShowDate = timeStamp != feedDetails.time || feedDetails.id == id;
+                timeStamp = feedDetails.time;
+            }
+        }
+
+        mFeedDetailsList.setValue(feedDetailsList);
     }
 }

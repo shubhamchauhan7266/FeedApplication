@@ -46,6 +46,9 @@ public class FeedDetails implements Serializable {
     @Expose
     public boolean isLiked;
 
+    @Expose
+    public boolean isShowDate;
+
     @Ignore
     public boolean isTextOnly() {
         if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {

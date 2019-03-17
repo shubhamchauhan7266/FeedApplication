@@ -21,10 +21,10 @@ public interface FeedDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ArrayList<FeedDetails> feedList);
 
-    @Query("SELECT id, title, name, description, imageUrl, text, time, isLiked FROM feed_details")
+    @Query("SELECT id, title, name, description, imageUrl, text, time, isLiked, isShowDate FROM feed_details")
     List<FeedDetails> getFeedDetailsList();
 
-    @Query("SELECT id, title, name, description, imageUrl, text, time, isLiked FROM feed_details WHERE id = :id")
+    @Query("SELECT id, title, name, description, imageUrl, text, time, isLiked, isShowDate FROM feed_details WHERE id = :id")
     FeedDetails getFeedDetails(int id);
 
     @Query("DELETE FROM feed_details")
