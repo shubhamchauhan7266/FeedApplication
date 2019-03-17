@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools"
     tools:context=".ui.FeedDetailsActivity">
 
     <data>
@@ -46,6 +47,7 @@
                 android:layout_height="@dimen/_150sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:scaleType="centerCrop"
+                bind:imageUrl="@{feedDetails.imageUrl}"
                 android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
                 app:srcCompat="@drawable/placeholder" />
 
@@ -54,6 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
                 android:scaleType="centerCrop"
+                bind:imageUrl="@{feedDetails.imageUrl}"
                 android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
                 app:srcCompat="@drawable/placeholder" />
 

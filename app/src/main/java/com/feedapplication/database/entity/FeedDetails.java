@@ -3,9 +3,13 @@ package com.feedapplication.database.entity;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.BindingAdapter;
+import android.widget.ImageView;
 
+import com.feedapplication.R;
 import com.feedapplication.utills.OtherUtils;
 import com.google.gson.annotations.Expose;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 
@@ -71,5 +75,14 @@ public class FeedDetails implements Serializable {
         } else {
             return false;
         }
+    }
+
+    @Ignore
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Picasso.with(view.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder)
+                .into(view);
     }
 }

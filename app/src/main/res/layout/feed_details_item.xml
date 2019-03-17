@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -83,7 +84,8 @@
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:scaleType="centerCrop"
                     android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
-                    app:srcCompat="@drawable/placeholder" />
+                    app:srcCompat="@drawable/placeholder"
+                    bind:imageUrl="@{feedDetails.imageUrl}" />
 
                 <ImageView
                     android:id="@+id/iv_post"
@@ -92,7 +94,8 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:scaleType="centerCrop"
                     android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
-                    app:srcCompat="@drawable/placeholder" />
+                    app:srcCompat="@drawable/placeholder"
+                    bind:imageUrl="@{feedDetails.imageUrl}" />
 
                 <TextView
                     android:id="@+id/tv_text"
@@ -115,8 +118,8 @@
                 android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
                 android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
                 android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
-                android:textStyle="bold"
                 android:textSize="@dimen/_11sdp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/tv_title"
                 app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 
