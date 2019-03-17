@@ -13,6 +13,11 @@ import com.feedapplication.databinding.ActivityFeedDetailsBinding;
 import com.feedapplication.utills.ConnectivityUtils;
 import com.feedapplication.viewmodel.FeedDetailsViewModel;
 
+/**
+ * Activity class is used to show Feed Details.
+ *
+ * @author Shubham Chauhan
+ */
 public class FeedDetailsActivity extends BaseActivity {
 
     private FeedDetails mFeedDetails;

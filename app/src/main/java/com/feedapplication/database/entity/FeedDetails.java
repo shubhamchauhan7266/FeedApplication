@@ -7,7 +7,7 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.feedapplication.R;
-import com.feedapplication.utills.OtherUtils;
+import com.feedapplication.utills.StringUtils;
 import com.google.gson.annotations.Expose;
 import com.squareup.picasso.Picasso;
 
@@ -51,9 +51,9 @@ public class FeedDetails implements Serializable {
 
     @Ignore
     public boolean isTextOnly() {
-        if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {
+        if (!StringUtils.isNullOrEmpty(text) && !StringUtils.isNullOrEmpty(imageUrl)) {
             return false;
-        } else if (OtherUtils.isNullOrEmpty(text)) {
+        } else if (StringUtils.isNullOrEmpty(text)) {
             return false;
         } else {
             return true;
@@ -62,9 +62,9 @@ public class FeedDetails implements Serializable {
 
     @Ignore
     public boolean isPostOnly() {
-        if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {
+        if (!StringUtils.isNullOrEmpty(text) && !StringUtils.isNullOrEmpty(imageUrl)) {
             return false;
-        } else if (OtherUtils.isNullOrEmpty(imageUrl)) {
+        } else if (StringUtils.isNullOrEmpty(imageUrl)) {
             return false;
         } else {
             return true;
@@ -73,7 +73,7 @@ public class FeedDetails implements Serializable {
 
     @Ignore
     public boolean isPostAndTextAvailable() {
-        if (!OtherUtils.isNullOrEmpty(text) && !OtherUtils.isNullOrEmpty(imageUrl)) {
+        if (!StringUtils.isNullOrEmpty(text) && !StringUtils.isNullOrEmpty(imageUrl)) {
             return true;
         } else {
             return false;

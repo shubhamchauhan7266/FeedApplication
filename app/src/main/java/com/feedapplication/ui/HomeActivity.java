@@ -20,6 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Activity class is used to show Feed details list.
+ *
+ * @author Shubham Chauhan
+ */
 public class HomeActivity extends BaseActivity implements FeedDetailsListAdapter.IFeedDetailsListAdapterCallBack, Observer<List<FeedDetails>> {
 
     private FeedDetailsViewModel mViewModel;

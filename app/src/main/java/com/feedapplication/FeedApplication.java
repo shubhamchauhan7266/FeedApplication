@@ -13,6 +13,11 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * This Application class is used by whole application.
+ *
+ * @author Shubham Chauhan
+ */
 public class FeedApplication extends MultiDexApplication {
 
     private static Retrofit mRetrofitClient;
