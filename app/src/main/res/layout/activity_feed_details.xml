@@ -20,7 +20,8 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_25sdp">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -142,7 +143,6 @@
                 android:text="@{feedDetails.description}"
                 android:textColor="@color/fontPrimary50"
                 android:textSize="@dimen/_11sdp"
-                android:layout_marginBottom="@dimen/_25sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_description_text"
                 app:layout_constraintTop_toBottomOf="@+id/tv_description_text" />

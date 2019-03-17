@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.feedapplication.BaseActivity;
 import com.feedapplication.database.FeedDetailsDatabase;
 import com.feedapplication.database.dao.FeedDetailsDao;
 import com.feedapplication.database.entity.FeedDetails;
@@ -20,9 +21,11 @@ public class FeedDetailsRepo {
 
     private final Context mContext;
     private final FeedDetailsDao mFeedDetailsDao;
+    private IDatabaseListener mIDatabaseListener;
 
-    public FeedDetailsRepo(Context context, Application application) {
+    public FeedDetailsRepo(Context context, Application application, IDatabaseListener listener) {
         mContext = context;
+        mIDatabaseListener = listener;
         FeedDetailsDatabase database = FeedDetailsDatabase.getInstance(application);
         mFeedDetailsDao = database.getFeedDetailsDao();
     }
@@ -49,11 +52,19 @@ public class FeedDetailsRepo {
 
     @SuppressLint("StaticFieldLeak")
     private void insertFeedDetailsTask(final ArrayList<FeedDetails> feedDetailsList) {
-        new AsyncTask<Void, Void, Void>() {
+        new AsyncTask<Void, Void, Boolean>() {
             @Override
-            protected Void doInBackground(Void... voids) {
+            protected Boolean doInBackground(Void... voids) {
                 mFeedDetailsDao.insert(feedDetailsList);
-                return null;
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean result) {
+                super.onPostExecute(result);
+                if (result) {
+                    mIDatabaseListener.onDbOperationSuccess((BaseActivity) mContext);
+                }
             }
         }.execute();
     }
@@ -78,5 +89,9 @@ public class FeedDetailsRepo {
                 return null;
             }
         }.execute();
+    }
+
+    public interface IDatabaseListener {
+        void onDbOperationSuccess(BaseActivity context);
     }
 }

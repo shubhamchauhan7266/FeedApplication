@@ -26,7 +26,7 @@ import retrofit2.Response;
  *
  * @author Shubham Chauhan
  */
-public class FeedDetailsViewModel extends ViewModel {
+public class FeedDetailsViewModel extends ViewModel implements FeedDetailsRepo.IDatabaseListener {
 
     private String TAG = FeedDetailsViewModel.class.getSimpleName();
     private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
@@ -43,9 +43,11 @@ public class FeedDetailsViewModel extends ViewModel {
             //we will load it asynchronously from server in this method
         }
         if (ConnectivityUtils.isNetworkEnabled(context)) {
+            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
+            repo.deleteAllRecords();
             loadFeedDetailsListData(context);
         } else {
-            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication());
+            FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
             ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
             mFeedDetailsList.setValue(feedDetails);
         }
@@ -60,7 +62,7 @@ public class FeedDetailsViewModel extends ViewModel {
             mFeedDetailsList = new MutableLiveData<>();
             //we will load it asynchronously from server in this method
         }
-        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication());
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
         ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
         mFeedDetailsList.setValue(feedDetails);
 
@@ -69,7 +71,7 @@ public class FeedDetailsViewModel extends ViewModel {
     }
 
     public void setLikedDisLiked(BaseActivity context, int id, boolean isLiked) {
-        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication());
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
         repo.setLikedDisliked(id, isLiked);
     }
 
@@ -81,21 +83,26 @@ public class FeedDetailsViewModel extends ViewModel {
         call.enqueue(new Callback<List<FeedDetails>>() {
             @Override
             public void onResponse(Call<List<FeedDetails>> call,
-                                   Response<List<FeedDetails>> response) {
+                                   final Response<List<FeedDetails>> response) {
                 assert response.body() != null;
 
                 //finally we are setting the list to our MutableLiveData and DB
-                FeedDetailsRepo repo = new FeedDetailsRepo(context, ((BaseActivity) context).getApplication());
-
-                repo.deleteAllRecords();
+                FeedDetailsRepo repo = new FeedDetailsRepo(context, ((BaseActivity) context).getApplication(),FeedDetailsViewModel.this);
                 repo.insertFeedDetailsList((ArrayList<FeedDetails>) response.body());
-                mFeedDetailsList.setValue(repo.getFeedDetailsList());
             }
 
             @Override
             public void onFailure(Call<List<FeedDetails>> call, Throwable throwable) {
                 Log.e(TAG, throwable.getMessage());
+                ((BaseActivity) context).removeProgressDialog();
             }
         });
+    }
+
+    @Override
+    public void onDbOperationSuccess(BaseActivity context) {
+        FeedDetailsRepo repo = new FeedDetailsRepo(context, context.getApplication(),this);
+        ArrayList<FeedDetails> feedDetails = repo.getFeedDetailsList();
+        mFeedDetailsList.setValue(feedDetails);
     }
 }
