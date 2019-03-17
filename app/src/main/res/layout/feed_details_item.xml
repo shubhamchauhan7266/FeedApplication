@@ -16,132 +16,116 @@
 
         <variable
             name="position"
-            type="Integer"/>
+            type="Integer" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/root_view"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()-> callback.onFeedDetailsClick(position)}"
-        android:layout_marginTop="@dimen/_10sdp">
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/_5sdp">
 
-        <TextView
-            android:id="@+id/tv_time_stamp"
-            android:layout_width="0dp"
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/root_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_grey"
-            android:padding="@dimen/_10sdp"
-            android:text="@{String.valueOf(feedDetails.time)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:onClick="@{()-> callback.onFeedDetailsClick(position)}"
+            android:paddingBottom="@dimen/_10sdp">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:text="@{feedDetails.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_time_stamp" />
+            <TextView
+                android:id="@+id/tv_time_stamp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/light_grey"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@{String.valueOf(feedDetails.time)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_70sdp"
-            android:text="@{feedDetails.text}"
-            android:visibility="@{feedDetails.textOnly?View.VISIBLE:View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_title"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:text="@{feedDetails.title}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_time_stamp" />
 
-        <ImageView
-            android:id="@+id/iv_post"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_150sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_70sdp"
-            android:scaleType="centerCrop"
-            android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_title"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/placeholder" />
+            <RelativeLayout
+                android:id="@+id/rl_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
-        <ImageView
-            android:id="@+id/iv_post_half"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_150sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_70sdp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/placeholder" />
+                <ImageView
+                    android:id="@+id/iv_post_half"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:scaleType="centerCrop"
+                    android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
+                    app:srcCompat="@drawable/placeholder" />
 
-        <TextView
-            android:id="@+id/tv_text_half"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:text="@{feedDetails.text}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_post_half"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                <ImageView
+                    android:id="@+id/iv_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:scaleType="centerCrop"
+                    android:visibility="@{feedDetails.postOnly?View.VISIBLE:View.GONE}"
+                    app:srcCompat="@drawable/placeholder" />
 
-        <android.support.constraint.Group
-            android:id="@+id/group_half"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="@{feedDetails.postAndTextAvailable?View.VISIBLE:View.GONE}"
-            app:constraint_referenced_ids="tv_text_half,iv_post_half" />
+                <TextView
+                    android:id="@+id/tv_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_toEndOf="@+id/iv_post_half"
+                    android:text="@{feedDetails.text}" />
 
-        <android.support.constraint.Group
-            android:id="@+id/group_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="tv_text_half,iv_post_half,iv_post,tv_text" />
+            </RelativeLayout>
 
-        <Button
-            android:id="@+id/bt_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_25sdp"
-            android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
-            android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
-            android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_title" />
+            <Button
+                android:id="@+id/bt_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@{feedDetails.isLiked ? @drawable/custom_blue_button : @drawable/custom_grey_button}"
+                android:text="@{feedDetails.isLiked ? @string/unlike : @string/like}"
+                android:textColor="@{feedDetails.isLiked ? @color/background_grey : @color/colorPrimary}"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/rl_view" />
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:text="@{feedDetails.name}"
-            app:layout_constraintBottom_toBottomOf="@+id/bt_like"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/bt_like"
-            app:layout_constraintTop_toTopOf="@+id/bt_like" />
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:text="@{feedDetails.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/bt_like"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/bt_like"
+                app:layout_constraintTop_toTopOf="@+id/bt_like" />
 
-    </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
 
 </layout>
